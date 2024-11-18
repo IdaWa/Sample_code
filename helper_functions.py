@@ -6,6 +6,10 @@ from index_functions import load_data
 from llama_index import VectorStoreIndex, ServiceContext, Document
 from llama_index.llms import OpenAI
 from llama_index import SimpleDirectoryReader
+import random
+
+thanks_phrases = ["Thank you!", "Much appreciated!", "Thanks a lot!"]
+initial_message_phrases = ["Hello! How can I assist you today?", "Hi there! What can I help you with?"]
 
 # Main function to generate responses from OpenAI's API, not considering indexed data
 def generate_response(prompt, history, model_name, temperature):

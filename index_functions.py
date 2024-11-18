@@ -4,10 +4,10 @@ import json
 import nltk
 import string
 import requests
-
+import os
 # Third-Party Imports
 import streamlit as st
-import langchain
+from langchain.chat_models import ChatOpenAI
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import TfidfVectorizer
 from nltk.tokenize import word_tokenize
@@ -15,7 +15,8 @@ from stop_words import get_stop_words
 from llama_index import VectorStoreIndex, ServiceContext, Document
 from llama_index.llms import OpenAI
 from llama_index import SimpleDirectoryReader
-
+from llama_index import GPTSimpleVectorIndex
+from llama_index import GPTVectorStoreIndex, LLMPredictor, PromptHelper
 # Download necessary nltk resources
 nltk.download('punkt')
 
@@ -31,7 +32,7 @@ def load_data():
 
 #################################################################################
 # Additional, specific functions I had in the Innovation CoPilot for inspiration:
-
+excluded_keywords=[]
 # Function to extract keywords from a text
 def extract_keywords(text):
     tokens = preprocess(text)
